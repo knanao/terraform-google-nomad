@@ -10,6 +10,10 @@ addresses {
   https = "0.0.0.0"
 }
 
+connect {
+  enabled = true
+}
+
 ports {
   dns       = 8600
   http      = 8500
@@ -29,8 +33,13 @@ retry_join = ["provider=gce project_name={PROJECT-NAME} tag_value=server"]
 server = false
 
 acl {
-  enabled        = {ACLs-ENABLED}
-  default_policy = "{ACLs-DEFAULT-POLICY}"
+  enabled                  = {ACLs-ENABLED}
+  default_policy           = "{ACLs-DEFAULT-POLICY}"
+  enable_token_persistence = true
+  tokens {
+    initial_management = "{CONSUL-TOKEN}"
+    agent              = "{CONSUL-TOKEN}"
+  }
 }
 
 tls {
@@ -39,7 +48,7 @@ tls {
     cert_file = "/etc/consul.d/client.pem"
     key_file = "/etc/consul.d/client-key.pem"
 
-    verify_incoming = true
+    verify_incoming = false
     verify_outgoing = true
   }
 

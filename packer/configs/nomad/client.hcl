@@ -45,13 +45,15 @@ tls {
 }
 
 consul {
-  ssl        = true
-  verify_ssl = true
-  address    = "127.0.0.1:8501"
-  ca_file    = "/etc/consul.d/consul-ca.pem"
-  cert_file  = "/etc/consul.d/client.pem"
-  key_file   = "/etc/consul.d/client-key.pem"
-  token      = "{CONSUL-TOKEN}"
+  ssl          = true
+  verify_ssl   = true
+  address      = "127.0.0.1:8501"
+  ca_file      = "/etc/consul.d/consul-ca.pem"
+  cert_file    = "/etc/consul.d/client.pem"
+  key_file     = "/etc/consul.d/client-key.pem"
+  token        = "{CONSUL-TOKEN}"
+  grpc_ca_file = "/etc/consul.d/consul-ca.pem"
+  grpc_address = "127.0.0.1:8503"
 }
 
 telemetry {

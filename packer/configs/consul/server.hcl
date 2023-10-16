@@ -34,16 +34,13 @@ autopilot {
   server_stabilization_time = "10s"
 }
 
-connect {
-  enabled = true
-}
-
 acl {
   enabled                  = {ACLs-ENABLED}
   default_policy           = "{ACLs-DEFAULT-POLICY}"
   enable_token_persistence = true
   tokens {
-    master = "{CONSUL-TOKEN}"
+    initial_management = "{CONSUL-TOKEN}"
+    agent              = "{CONSUL-TOKEN}"
   }
 }
 
@@ -57,7 +54,7 @@ tls {
     cert_file = "/etc/consul.d/server.pem"
     key_file = "/etc/consul.d/server-key.pem"
 
-    verify_incoming = true
+    verify_incoming = false
     verify_outgoing = true
   }
 

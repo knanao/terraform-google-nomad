@@ -253,10 +253,18 @@ terraform apply -auto-approve -var="project=$GOOGLE_PROJECT" -var="credentials=$
 Using the Terraform outputs, we can set the required Nomad environment variables to securely access to the Nomad cluster API using the TLS information, and load balancer created with the previous step:
 
 ```console
+=== Nomad ===
 export NOMAD_ADDR="https://$(terraform output -json | jq -r .load_balancer_ip.value):4646"
 export NOMAD_CACERT="$(realpath nomad-ca.pem)"
 export NOMAD_CLIENT_CERT="$(realpath nomad-cli-cert.pem)"
 export NOMAD_CLIENT_KEY="$(realpath nomad-cli-key.pem)"
+
+=== Consul ===
+export CONSUL_HTTP_ADDR="https://$(terraform output -json | jq -r .load_balancer_ip.value):8501"
+export CONSUL_CACERT="$(realpath consul-ca.pem)"
+export CONSUL_CLIENT_CERT="$(realpath consul-cli-cert.pem)"
+export CONSUL_CLIENT_KEY="$(realpath consul-cli-key.pem)"
+export CONSUL_HTTP_TOKEN="$(terraform output -json | jq -r .consul_master_token.value)"
 ```
 
 ## Bootstrap ACL System
