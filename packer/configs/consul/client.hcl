@@ -22,7 +22,7 @@ ports {
   grpc_tls  = 8503
 }
 
-log_level = "DEBUG"
+log_level = "TRACE"
 
 disable_remote_exec = true
 disable_update_check = true

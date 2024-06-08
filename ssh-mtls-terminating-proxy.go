@@ -204,7 +204,7 @@ func main() {
 
 	go func() {
 		defer wg.Done()
-		log.Println("tunneling a new connection for somad to the server with ssh through the bastion")
+		log.Println("tunneling a new connection for nomad to the server with ssh through the bastion")
 		tclient := ssh.NewClient(stconn, chans, reqs)
 		defer tclient.Close()
 

@@ -3,7 +3,7 @@ module "load_balancer" {
   enabled           = var.nomad_load_balancer_enabled
   region            = var.region
   name              = "load-balancer"
-  ports             = [4646,8501]
+  ports             = [4646, 8501]
   health_check_port = 4646
   target_tags       = ["server"]
   network           = module.network.name

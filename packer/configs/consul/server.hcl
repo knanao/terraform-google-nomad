@@ -16,10 +16,9 @@ ports {
   https     = 8501
 }
 
-log_level = "DEBUG"
+log_level = "TRACE"
 
 server = true
-ui = true
 disable_remote_exec = true
 disable_update_check = true
 bootstrap_expect = {NUMBER-OF-SERVERS}
@@ -70,4 +69,12 @@ auto_encrypt {
 telemetry {
   prometheus_retention_time  = "24h"
   disable_hostname           = true
+}
+
+ui_config {
+  enabled = true
+  metrics_provider = "prometheus"
+  metrics_proxy {
+    base_url = "http://prometheus.service.consul"
+  }
 }

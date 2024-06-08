@@ -1,22 +1,23 @@
 datacenter = "dc1"
-log_level = "DEBUG"
+log_level = "TRACE"
 data_dir = "/etc/nomad.d/data"
 
 client {
   enabled = true
 
-  server_join {
-    retry_join     = ["provider=gce project_name={PROJECT-NAME} tag_value=server"]
-    retry_max      = 12
-    retry_interval = "10s"
-  }
+  //server_join {
+  //  retry_join     = ["provider=gce project_name={PROJECT-NAME} tag_value=server"]
+  //  retry_max      = 12
+  //  retry_interval = "10s"
+  //}
 
   options {
     "driver.docker.enable" = "1"
-    "driver.whitelist"     = "docker"
+    "driver.raw_exec.enable" = "1"
+    "driver.whitelist"     = "docker,raw_exec"
     "user.blacklist"       = "root,ubuntu"
-    // "docker.auth.config"   = "/etc/nomad.d/docker_auth_config.json"
-    // "docker.auth.helper"   = "gcr"
+    //"docker.auth.config"   = "/etc/nomad.d/docker_auth_config.json"
+    //"docker.auth.helper"   = "gcr"
   }
 
   meta {
@@ -72,10 +73,10 @@ plugin "docker" {
 
     allow_privileged = false
 
-    // auth {
-    //   config = "/etc/nomad.d/docker_auth_config.json"
-    //   helper = "gcr"
-    // }
+    //auth {
+    //  config = "/etc/nomad.d/docker_auth_config.json"
+    //  helper = "gcr"
+    //}
 
     extra_labels = ["job_name", "job_id", "task_group_name", "task_name", "namespace", "node_name", "node_id"]
 

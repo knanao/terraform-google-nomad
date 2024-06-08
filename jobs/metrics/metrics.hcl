@@ -13,32 +13,32 @@ variable "consul_lb_ip" {
 
 variable "nomad_ca" {
   type    = string
-  default = "nomad-ca.pem"
+  default = "../example/nomad-ca.pem"
 }
 
 variable "nomad_cli" {
   type    = string
-  default = "nomad-cli-cert.pem"
+  default = "../example/nomad-cli-cert.pem"
 }
 
 variable "nomad_cli_key" {
   type    = string
-  default = "nomad-cli-key.pem"
+  default = "../example/nomad-cli-key.pem"
 }
 
 variable "consul_ca" {
   type    = string
-  default = "consul-ca.pem"
+  default = "../example/consul-ca.pem"
 }
 
 variable "consul_cli" {
   type    = string
-  default = "consul-cli-cert.pem"
+  default = "../example/consul-cli-cert.pem"
 }
 
 variable "consul_cli_key" {
   type    = string
-  default = "consul-cli-key.pem"
+  default = "../example/consul-cli-key.pem"
 }
 
 variable "consul_targets" {
@@ -205,7 +205,7 @@ EOH
 
     group "grafana" {
         network {
-            mode ="bridge"
+            mode = "bridge"
         }
 
         service {

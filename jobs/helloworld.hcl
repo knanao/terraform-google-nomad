@@ -2,27 +2,47 @@ job "helloworld" {
   datacenters = ["dc1"]
   type        = "service"
 
+  // constraint {
+  //   attribute = "${node.unique.name}"
+  //   value     = "client-0"
+  // }
+  meta {
+    my-key = "my-value-1"
+  }
+
+  migrate {
+    max_parallel     = 1
+    health_check     = "checks"
+    min_healthy_time = "10s"
+    healthy_deadline = "5m"
+  }
+
   group "helloworld" {
-    count = 1
+    count = 4
 
     network {
       port "http" {
-        static = 8000
         to = 8000
       }
     }
 
     update {
       max_parallel     = 1
-      min_healthy_time = "30s"
-      healthy_deadline = "5m"
+      min_healthy_time = "10s"
+      healthy_deadline = "1m"
     }
 
     restart {
-      attempts = 2
+      attempts = 1
       interval = "30m"
       delay = "15s"
       mode = "fail"
+    }
+
+    reschedule {
+      attempts = 1
+      interval = "15m"
+      unlimited = false
     }
 
     task "helloworld" {
@@ -31,14 +51,6 @@ job "helloworld" {
       config {
         image = "mnomitch/hello_world_server"
         ports = ["http"]
-        // logging = {
-        //   driver = "journald"
-        //   options = [
-        //     {
-        //       "tag" = "hello_world"
-        //     }
-        //   ]
-        // }
       }
 
       env {
@@ -50,13 +62,13 @@ job "helloworld" {
       name = "helloworld"
       port = "http"
 
-      check {
-        name     = "alive"
-        type     = "http"
-        path     = "/"
-        interval = "10s"
-        timeout  = "2s"
-      }
+      //check {
+      //  name     = "alive"
+      //  type     = "http"
+      //  path     = "/"
+      //  interval = "10s"
+      //  timeout  = "2s"
+      //}
     }
   }
 }

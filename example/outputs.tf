@@ -61,9 +61,24 @@ output "server_internal_ip" {
   value       = module.nomad.server_internal_ip
 }
 
+output "server_internal_ips" {
+  description = "The Nomad/Consul client private IP addresses."
+  value       = module.nomad.server_internal_ips
+}
+
+output "client_internal_ips" {
+  description = "The Nomad/Consul client private IP addresses."
+  value       = module.nomad.client_internal_ips
+}
+
 output "load_balancer_ip" {
   description = "The external ip address of the load balacner"
   value       = module.nomad.load_balancer_ip
+}
+
+output "grafana_load_balancer_ip" {
+  description = "The external ip address of the grafana load balacner"
+  value       = module.nomad.grafana_load_balancer_ip
 }
 
 output "consul_master_token" {

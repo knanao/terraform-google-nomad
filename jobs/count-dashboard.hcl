@@ -1,6 +1,8 @@
 job "countdash" {
    datacenters = ["dc1"]
    group "api" {
+     count = 2
+
      network {
        mode = "bridge"
      }
@@ -23,6 +25,8 @@ job "countdash" {
    }
 
    group "dashboard" {
+     count = 1
+
      network {
        mode ="bridge"
        port "http" {

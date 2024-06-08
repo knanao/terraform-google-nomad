@@ -93,6 +93,16 @@ EOH
 EOH
             }
 
+            template {
+                change_mode = "restart"
+                destination = "local/traefik/services.txt"
+                data = <<EOF
+{{- range service "helloworld" }}
+  {{ .ServiceMeta.app }}
+{{ end }}
+EOF
+            }
+
             driver = "docker"
 
             config {
